@@ -6,13 +6,14 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/akhilsharma90/go-graphql-microservice/account/pb"
+	"github.com/Catastrophe007/microservices-golang/account/pb" // Removed unused import
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
 type grpcServer struct {
 	service Service
+	pb.UnimplementedAccountServiceServer
 }
 
 func ListenGRPC(s Service, port int) error {
@@ -21,7 +22,10 @@ func ListenGRPC(s Service, port int) error {
 		return err
 	}
 	serv := grpc.NewServer()
-	pb.RegisterAccountServiceServer(serv, &grpcServer{s})
+	pb.RegisterAccountServiceServer(serv, &grpcServer{
+		UnimplementedAccountServiceServer: pb.UnimplementedAccountServiceServer{},
+		service:  s,
+	})
 	reflection.Register(serv)
 	return serv.Serve(lis)
 }

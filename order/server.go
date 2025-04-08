@@ -8,14 +8,15 @@ import (
 	"log"
 	"net"
 
-	account "github.com/akhilsharma90/go-graphql-microservice/account"
-	catalog "github.com/akhilsharma90/go-graphql-microservice/catalog"
-	"github.com/akhilsharma90/go-graphql-microservice/order/pb"
+	account "github.com/Catastrophe007/microservices-golang/account"
+	catalog "github.com/Catastrophe007/microservices-golang/catalog"
+	"github.com/Catastrophe007/microservices-golang/order/pb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
 type grpcServer struct {
+	pb.UnimplementedOrderServiceServer
 	service       Service
 	accountClient *account.Client
 	catalogClient *catalog.Client
@@ -42,9 +43,10 @@ func ListenGRPC(s Service, accountURL, catalogURL string, port int) error {
 
 	serv := grpc.NewServer()
 	pb.RegisterOrderServiceServer(serv, &grpcServer{
-		s,
-		accountClient,
-		catalogClient,
+		UnimplementedOrderServiceServer : pb.UnimplementedOrderServiceServer{},
+		service: s,
+		accountClient: accountClient,
+		catalogClient: catalogClient,
 	})
 	reflection.Register(serv)
 

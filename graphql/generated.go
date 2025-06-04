@@ -302,7 +302,7 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 	inputUnmarshalMap := graphql.BuildUnmarshalerMap(
 		ec.unmarshalInputAccountInput,
 		ec.unmarshalInputOrderInput,
-		ec.unmarshalInputOrderedProductInput,
+		ec.unmarshalInputOrderProductInput,
 		ec.unmarshalInputPaginationInput,
 		ec.unmarshalInputProductInput,
 	)
@@ -3948,7 +3948,7 @@ func (ec *executionContext) unmarshalInputOrderInput(ctx context.Context, obj an
 			it.AccountID = data
 		case "products":
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("products"))
-			data, err := ec.unmarshalNOrderedProductInput2ᚕᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐOrderedProductInputᚄ(ctx, v)
+			data, err := ec.unmarshalNOrderProductInput2ᚕᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐOrderProductInputᚄ(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -3959,8 +3959,8 @@ func (ec *executionContext) unmarshalInputOrderInput(ctx context.Context, obj an
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputOrderedProductInput(ctx context.Context, obj any) (OrderedProductInput, error) {
-	var it OrderedProductInput
+func (ec *executionContext) unmarshalInputOrderProductInput(ctx context.Context, obj any) (OrderProductInput, error) {
+	var it OrderProductInput
 	asMap := map[string]any{}
 	for k, v := range obj.(map[string]any) {
 		asMap[k] = v
@@ -4969,6 +4969,28 @@ func (ec *executionContext) unmarshalNOrderInput2githubᚗcomᚋCatastrophe007�
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
+func (ec *executionContext) unmarshalNOrderProductInput2ᚕᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐOrderProductInputᚄ(ctx context.Context, v any) ([]*OrderProductInput, error) {
+	var vSlice []any
+	if v != nil {
+		vSlice = graphql.CoerceList(v)
+	}
+	var err error
+	res := make([]*OrderProductInput, len(vSlice))
+	for i := range vSlice {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithIndex(i))
+		res[i], err = ec.unmarshalNOrderProductInput2ᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐOrderProductInput(ctx, vSlice[i])
+		if err != nil {
+			return nil, err
+		}
+	}
+	return res, nil
+}
+
+func (ec *executionContext) unmarshalNOrderProductInput2ᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐOrderProductInput(ctx context.Context, v any) (*OrderProductInput, error) {
+	res, err := ec.unmarshalInputOrderProductInput(ctx, v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
 func (ec *executionContext) marshalNOrderedProduct2ᚕᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐOrderedProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*OrderedProduct) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
@@ -5021,28 +5043,6 @@ func (ec *executionContext) marshalNOrderedProduct2ᚖgithubᚗcomᚋCatastrophe
 		return graphql.Null
 	}
 	return ec._OrderedProduct(ctx, sel, v)
-}
-
-func (ec *executionContext) unmarshalNOrderedProductInput2ᚕᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐOrderedProductInputᚄ(ctx context.Context, v any) ([]*OrderedProductInput, error) {
-	var vSlice []any
-	if v != nil {
-		vSlice = graphql.CoerceList(v)
-	}
-	var err error
-	res := make([]*OrderedProductInput, len(vSlice))
-	for i := range vSlice {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithIndex(i))
-		res[i], err = ec.unmarshalNOrderedProductInput2ᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐOrderedProductInput(ctx, vSlice[i])
-		if err != nil {
-			return nil, err
-		}
-	}
-	return res, nil
-}
-
-func (ec *executionContext) unmarshalNOrderedProductInput2ᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐOrderedProductInput(ctx context.Context, v any) (*OrderedProductInput, error) {
-	res, err := ec.unmarshalInputOrderedProductInput(ctx, v)
-	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
 func (ec *executionContext) marshalNProduct2ᚕᚖgithubᚗcomᚋCatastrophe007ᚋmicroservicesᚑgolangᚋgraphqlᚐProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*Product) graphql.Marshaler {

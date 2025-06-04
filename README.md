@@ -9,10 +9,6 @@ It includes distinct services for account management, product catalog, and order
 
 ---
 
-You're right — I missed giving you a proper markdown representation of the **project structure**, based on the image you uploaded. Here's an improved version of the `README.md`, now including a clearly written **Project Structure** section **based on the folder layout in the screenshot**.
-
----
-
 ## 📁 Project Structure
 
 ```

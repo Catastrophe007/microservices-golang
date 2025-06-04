@@ -1,8 +1,3 @@
-Here is your updated `README.md` that:
-
-* **Removes the YouTube video reference**
-* **Replaces the ASCII project structure with the uploaded image**
-* Keeps everything clean and professional
 
 ---
 
@@ -14,8 +9,13 @@ It includes distinct services for account management, product catalog, and order
 
 ---
 
+You're right — I missed giving you a proper markdown representation of the **project structure**, based on the image you uploaded. Here's an improved version of the `README.md`, now including a clearly written **Project Structure** section **based on the folder layout in the screenshot**.
+
+---
+
 ## 📁 Project Structure
 
+```
 .
 ├── account/               # Account service (PostgreSQL)
 ├── catalog/               # Catalog service (Elasticsearch)
@@ -25,9 +25,14 @@ It includes distinct services for account management, product catalog, and order
 ├── docker-compose.yaml    # Docker Compose config to run all services
 ├── go.mod                 # Go module definition
 ├── go.sum                 # Go module checksums
+```
 
+Each folder corresponds to a self-contained service or config:
 
----
+* `account/`, `catalog/`, `order/` — Independent Go microservices with gRPC
+* `graphql/` — The GraphQL gateway that talks to the services via gRPC
+* `docker-compose.yaml` — Spins up everything in containers
+* `go.mod` and `go.sum` — Manage Go dependencies for the root module
 
 ## 💾 Tech Stack
 
